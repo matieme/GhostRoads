@@ -7,21 +7,18 @@ public class GameManager : MonoBehaviour
 {
     public Button restart;
     public PlayerMovement player;
+    public const float SPAWN_TIME = 1.0f;
  
-	void Start () 
-    {
-	    
-	}
 
 	void Update () 
     {
         if (player.isDead)
-            StartCoroutine(SpawnRestart());
+            StartCoroutine(SpawnRestart(SPAWN_TIME));
 	}
 
-    IEnumerator SpawnRestart()
+    IEnumerator SpawnRestart(float spawnTime)
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(spawnTime);
         restart.gameObject.SetActive(true);        
     }
 

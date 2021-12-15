@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Serialization;
 
 public class PowerBarController : MonoBehaviour {
 
@@ -7,21 +7,18 @@ public class PowerBarController : MonoBehaviour {
     public float speedUp = 18f;
     public float speedDown = 190f;
 
-    float statusBar;
+    public float statusBar;
 
-    public RectTransform RectTransform;
+    [SerializeField] private RectTransform rectTransform;
 
     void Start ()
     {
-        RectTransform = GetComponent<RectTransform>();
-        RectTransform.localPosition = new Vector3(0, -215, 0);
+        rectTransform.localPosition = new Vector3(0, -215, 0);
 	}
 
     void Update()
     {
-
-        statusBar = RectTransform.localPosition.y;
-
+        statusBar = rectTransform.localPosition.y;
 
         if(player.isStarted)
         {
@@ -31,24 +28,19 @@ public class PowerBarController : MonoBehaviour {
                 statusBar += speedUp * Time.deltaTime;
         }
 
-
         if (statusBar >= 0)
         {
             speedDown = 190f;
             speedUp = 0f;
             player.canSwipe = true;
-            Debug.Log("BAJA");
         }
 
-        if (statusBar <= -214f)
+        if (statusBar < -210f)
         {
             speedDown = 0f;
             speedUp = 18f;
-            Debug.Log("SUBE");
         }
 
-        Debug.Log("UP:  " + speedUp);
-        Debug.Log("DOWN:  " + speedDown);
-        RectTransform.localPosition = new Vector3(0, statusBar, 0);
+        rectTransform.localPosition = new Vector3(0, statusBar, 0);
     }
 }

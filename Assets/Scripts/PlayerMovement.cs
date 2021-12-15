@@ -2,9 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour {
-
-
+public class PlayerMovement : MonoBehaviour 
+{
     enum PLAYER_STATE
     {
         LEFT,
